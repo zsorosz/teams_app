@@ -5,7 +5,13 @@ var teamSchema = new mongoose.Schema({
     countrycode: String,
     teamlead: String,
     size: Number,
-    image: String
+    image: String,
+    members: [
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "Member"
+        }
+    ]
 });
 
 module.exports = mongoose.model("Team", teamSchema);

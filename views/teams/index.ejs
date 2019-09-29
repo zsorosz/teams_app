@@ -3,14 +3,17 @@
 <header class="jumbotron">
     <div class="container">
         <h1>List of all teams</h1>
+        <p>
+            <a class="btn btn-primary btn-lg" href="/teams/new">Add a new Team</a>
+        </p>
     </div>
 </header>
 
-<div class="container d-flex justify-content-around flex-wrap">
+<div class="container d-flex justify-content-left flex-wrap">
     <% teams.forEach(function(team){ %>
-        <div class="card" style="max-width: 20vw">
+        <div class="card" style="max-width: 20vw; border: none">
             <div class="d-flex">
-                <div>
+                <div style="width: 30%">
                     <img src="<%= team.image %>" alt="" class="card-img">
                 </div>
                 <div class="">
