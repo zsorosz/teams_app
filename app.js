@@ -2,6 +2,7 @@ var express         = require("express"),
     app             = express(),
     bodyParser      = require("body-parser"),
     mongoose        = require("mongoose"),
+    methodOverride  = require("method-override"),
     flash           = require("connect-flash"),
     Team            = require("./models/team"),
     Member          = require("./models/member"),
@@ -17,6 +18,7 @@ mongoose.connect('mongodb://localhost/teamsapp', {useNewUrlParser: true, useUnif
 app.use(bodyParser.urlencoded({extended: true}));
 app.set("view engine", "ejs");
 app.use(express.static(__dirname + "/public"));
+app.use(methodOverride("_method"));
 app.use(flash());
 //seedDB();
 

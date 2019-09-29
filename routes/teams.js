@@ -51,4 +51,24 @@ router.get("/:id", function(req, res){
     });
 });
 
+// EDIT TEAM ROUTE
+router.get("/:id/edit", function(req, res){
+    Team.findById(req.params.id, function(err, foundTeam){
+        res.render("teams/edit", {team: foundTeam});
+    });
+});
+
+// UPDATE TEAM ROUTE
+router.put("/:id", function(req, res){
+    Team.findByIdAndUpdate(req.params.id, req.body.team, function(err, team){
+        if(err){
+            //req.flash("error", err.message);
+            res.redirect("back");
+        } else {
+            //req.flash("success","Successfully Updated!");
+            res.redirect("/teams/" + team._id);
+        }
+    });
+  });
+
 module.exports = router;
