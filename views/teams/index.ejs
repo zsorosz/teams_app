@@ -1,0 +1,27 @@
+<% include ../partials/header %>
+
+<header class="jumbotron">
+    <div class="container">
+        <h1>List of all teams</h1>
+    </div>
+</header>
+
+<div class="container d-flex justify-content-around flex-wrap">
+    <% teams.forEach(function(team){ %>
+        <div class="card" style="max-width: 20vw">
+            <div class="d-flex">
+                <div>
+                    <img src="<%= team.image %>" alt="" class="card-img">
+                </div>
+                <div class="">
+                    <div class="card-body">
+                        <h5 class="card-title"><a href="/teams/<%= team._id %>">
+                        <%= team.country %></a></h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <% }) %>
+</div>
+
+<% include ../partials/footer %>

@@ -5,12 +5,26 @@ var data = [
     {
         country: "Hungary", 
         teamlead: "Ildiko Bognar",
-        size: "6"
+        size: 6,
+        image: "https://images.unsplash.com/photo-1563734484236-8b271b3c1e7a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80"
     },
     {
         country: "Germany", 
         teamlead: "German Guy",
-        size: "12"
+        size: 12,
+        image: "https://images.unsplash.com/photo-1506760610100-1af6025cf0c7?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=752&q=80"
+    },
+    {
+        country: "Hungary", 
+        teamlead: "Ildiko Bognar",
+        size: 6,
+        image: "https://images.unsplash.com/photo-1563734484236-8b271b3c1e7a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80"
+    },
+    {
+        country: "Germany", 
+        teamlead: "German Guy",
+        size: 12,
+        image: "https://images.unsplash.com/photo-1506760610100-1af6025cf0c7?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=752&q=80"
     }
 ]
  
