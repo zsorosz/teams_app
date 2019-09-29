@@ -1,0 +1,22 @@
+<% include ../partials/header %>
+<div class="container">
+    <div class="card">
+        <h4 class="card-title"><a href="#"><%= team.country %></a></h4>
+        <p class="card-text">Teamlead: <%= team.teamlead %></p>
+    </div>
+    <a class="btn btn-sm btn-warning d-inline float-right" href="/teams/<%= team._id %>/edit">Edit</a>
+    <div class="card bg-light p-3">
+        <% team.members.forEach(function(member) { %>
+            <div class="row">
+                <div class="col-md-12">
+                    <strong><%= member.firstname %></strong>
+                    <span class="float-right"><%= member.hoursperweek %>h/week</span>
+                    <p><%= member.position %></p>
+                </div>
+            </div>
+        <% }) %>
+    </div>
+</div>
+
+
+<% include ../partials/footer %>
