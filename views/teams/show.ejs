@@ -10,15 +10,13 @@
         <% team.members.forEach(function(member) { %>
             <div class="row">
                 <div class="col-md-12">
-                    <strong><%= member.firstname %></strong>
+                    <strong><%= member.firstname %> <%= member.lastname %></strong>
                     <span class="float-right"><%= member.hoursperweek %>h/week</span>
                     <p><%= member.position %></p>
                 </div>
             </div>
-        <% }) %>
+        <% }); %>
         <a class="btn btn-sm btn-warning d-inline float-right" href="/teams/<%= team._id %>/members/new">Add a new team member</a>
-    </div>
-</div>
 
 
 <% include ../partials/footer %>

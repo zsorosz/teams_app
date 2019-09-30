@@ -25,7 +25,7 @@ app.use(flash());
 
 app.use("/", indexRoutes);
 app.use("/teams", teamsRoutes);
-app.use("/teams/:id/member", membersRoutes);
+app.use("/teams/:id/members", membersRoutes);
 
 var port = process.env.PORT || 3000;
 app.listen(port, function () {

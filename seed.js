@@ -1,5 +1,6 @@
 var mongoose = require("mongoose");
 var Team = require("./models/team");
+var Member = require("./models/member");
  
 var data = [
     {
@@ -35,6 +36,11 @@ function seedDB(){
             console.log(err);
         }
         console.log("removed teams!");
+        Member.remove({}, function(err) {
+            if(err){
+                console.log(err);
+            }
+            console.log("removed members!");
              //add a few campgrounds
             data.forEach(function(seed){
                 Team.create(seed, function(err, team){
@@ -46,6 +52,7 @@ function seedDB(){
                 });
             });
         });
+   });
 }
  
 module.exports = seedDB;

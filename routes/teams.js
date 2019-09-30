@@ -40,7 +40,7 @@ router.post("/", function(req, res){
 //SHOW - shows more info about one team
 router.get("/:id", function(req, res){
     //find the team with provided id
-    Team.findById(req.params.id).exec(function(err, foundTeam){
+    Team.findById(req.params.id).populate("members").exec(function(err, foundTeam){
         if(err || !foundTeam){
             //req.flash("error", "Team not found");
             res.redirect("back");
