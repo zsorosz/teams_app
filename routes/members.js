@@ -41,7 +41,6 @@ router.post("/", function(req, res){
             console.log(err);
             res.redirect("/teams");
         } else {
-            console.log(req.body.member);
             Member.create(req.body.member, function(err, member){
                 if(err){
                     console.log(err);
@@ -50,7 +49,6 @@ router.post("/", function(req, res){
                     team.members.push(member);
                     team.save();
                     res.redirect("/teams/" + team._id);
-                    console.log(member.firstname);
                 }
             });
         }
@@ -80,6 +78,19 @@ router.put("/:member_id", function(req, res){
         if(err){
             res.redirect("back");
         } else {
+            res.redirect("/teams/" + req.params.id);
+        }
+    });
+});
+
+//Delete member
+router.delete("/:member_id", function(req, res){
+    //findById and remove
+    Member.findByIdAndRemove(req.params.member_id, function(err){
+        if(err){
+            res.redirect("back");
+        } else {
+            //req.flash("success", "Comment deleted")
             res.redirect("/teams/" + req.params.id);
         }
     });

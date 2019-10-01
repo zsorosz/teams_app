@@ -1,7 +1,7 @@
 <% include ../partials/header %>
 <div class="container">
     <div class="d-flex justify-content-end">
-        <a class="btn btn-sm btn-warning" href="/teams/<%= team._id %>/edit">Edit Team</a>
+        <a class="btn btn-sm btn-info" href="/teams/<%= team._id %>/edit">Edit Team</a>
         <form action="/teams/<%= team._id %>?_method=DELETE" method="POST">
             <button class="btn btn-sm btn-danger">Delete Team</button>
         </form>
@@ -18,9 +18,13 @@
                     <strong><%= member.firstname %> <%= member.lastname %></strong>
                     <span class="float-right"><%= member.hoursperweek %>h/week</span>
                     <p><%= member.position %></p>
-                    <a href="/teams/<%= team._id %>/members/<%= member._id %>/edit" class="btn btn-sm btn-warning float-right mb-3">Edit Member</a>
+                    <form class="float-right" action="/teams/<%= team._id %>/members/<%= member._id %>?_method=DELETE" method="POST">
+                        <input class="btn btn-sm btn-danger" type="submit" value="Delete Member">
+                    </form>
+                    <a href="/teams/<%= team._id %>/members/<%= member._id %>/edit" class="btn btn-sm btn-info float-right mb-3">Edit Member</a>
                 </div>
             </div>
+            <hr>
         <% }); %>
         <a class="btn btn-sm btn-warning d-inline float-right" href="/teams/<%= team._id %>/members/new">Add a new team member</a>
 
