@@ -1,5 +1,6 @@
 var express = require("express");
 var router = express.Router();
+var middleware = require("../middleware");
 var Team = require("../models/team");
 
 //INDEX - show all teams
@@ -14,12 +15,12 @@ router.get("/", function(req, res){
 });
 
 // NEW - show form to create new team
-router.get("/new", function(req, res){
+router.get("/new", middleware.isAdmin, function(req, res){
     res.render("teams/new.ejs");
 });
 
 //CREATE - add new team to DB
-router.post("/", function(req, res){
+router.post("/", middleware.isAdmin, function(req, res){
     var country = req.body.country;
     var image = req.body.image;
     var teamlead = req.body.teamlead;
@@ -52,14 +53,14 @@ router.get("/:id", function(req, res){
 });
 
 // EDIT TEAM ROUTE
-router.get("/:id/edit", function(req, res){
+router.get("/:id/edit", middleware.isAdmin, function(req, res){
     Team.findById(req.params.id, function(err, foundTeam){
         res.render("teams/edit", {team: foundTeam});
     });
 });
 
 // UPDATE TEAM ROUTE
-router.put("/:id", function(req, res){
+router.put("/:id", middleware.isAdmin, function(req, res){
     Team.findByIdAndUpdate(req.params.id, req.body.team, function(err, team){
         if(err){
             //req.flash("error", err.message);
@@ -72,7 +73,7 @@ router.put("/:id", function(req, res){
   });
 
   // DESTROY TEAM ROUTE
-router.delete("/:id", function(req, res){
+router.delete("/:id", middleware.isAdmin, function(req, res){
     Team.findByIdAndRemove(req.params.id, function(err){
         if(err){
             res.redirect("/teams");

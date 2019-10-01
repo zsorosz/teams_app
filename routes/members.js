@@ -1,10 +1,11 @@
 var express = require("express");
 var router = express.Router({mergeParams: true});
+var middleware = require("../middleware");
 var Team = require("../models/team");
 var Member = require("../models/member");
 
 // New member
-router.get("/new", function(req, res){
+router.get("/new", middleware.isAdmin, function(req, res){
     Team.findById(req.params.id, function(err, team){
         if(err){
             console.log(err);
@@ -35,7 +36,7 @@ router.get("/new", function(req, res){
 // });
 
 //Create member
-router.post("/", function(req, res){
+router.post("/", middleware.isAdmin, function(req, res){
     Team.findById(req.params.id, function(err, team){
         if(err){
             console.log(err);
@@ -56,7 +57,7 @@ router.post("/", function(req, res){
 });
 
 // Edit member
-router.get("/:member_id/edit", function(req, res){
+router.get("/:member_id/edit", middleware.isAdmin, function(req, res){
     Team.findById(req.params.id, function(err, foundTeam){
         if(err || !foundTeam){
             //req.flash("error", "Campground not found");
@@ -73,7 +74,7 @@ router.get("/:member_id/edit", function(req, res){
 });
 
 //Update member
-router.put("/:member_id", function(req, res){
+router.put("/:member_id", middleware.isAdmin, function(req, res){
     Member.findByIdAndUpdate(req.params.member_id, req.body.member, function(err, updatedMember){
         if(err){
             res.redirect("back");
@@ -84,7 +85,7 @@ router.put("/:member_id", function(req, res){
 });
 
 //Delete member
-router.delete("/:member_id", function(req, res){
+router.delete("/:member_id", middleware.isAdmin, function(req, res){
     //findById and remove
     Member.findByIdAndRemove(req.params.member_id, function(err){
         if(err){

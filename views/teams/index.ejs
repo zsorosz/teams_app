@@ -4,7 +4,9 @@
     <div class="container">
         <h1>List of all teams</h1>
         <p>
+            <% if(currentUser && currentUser.isAdmin){ %>
             <a class="btn btn-outline-dark btn-lg" href="/teams/new">Add a new Team</a>
+            <% } %>
         </p>
     </div>
 </header>
