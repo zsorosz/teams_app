@@ -57,5 +57,21 @@ router.post("/", function(req, res){
     });
 });
 
+// Edit member
+router.get("/:member_id/edit", function(req, res){
+    Team.findById(req.params.id, function(err, foundTeam){
+        if(err || !foundTeam){
+            //req.flash("error", "Campground not found");
+            return res.redirect("back");
+        }
+        Member.findById(req.params.member_id, function(err, foundMember){
+            if(err){
+                res.redirect("back");
+            } else {
+                res.render("members/edit", {team_id: req.params.id, member: foundMember});
+            }
+        });
+    });
+});
 
 module.exports = router;

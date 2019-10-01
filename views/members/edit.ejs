@@ -1,0 +1,32 @@
+<% include ../partials/header %>
+<div class="container">
+    <div>
+        <h1 style="text-align: center;">Edit team member</h1>
+        <div style="width: 30%; margin: 25px auto;">
+            <form action="/teams/<%= team_id %>/members/<%= member._id %>?_method=PUT" method="POST">
+                <div class="form-group">
+                    <label for="firstname">First name</label>
+                    <input class="form-control" type="text" id="firstname" name="member[firstname]" value="<%= member.firstname %>">
+                </div>
+                <div class="form-group">
+                    <label for="lastname">Last name</label>
+                    <input class="form-control" type="text" id="lastname" name="member[lastname]" value="<%= member.lastname %>">
+                </div>
+                <div class="form-group">
+                    <label for="position">Position</label>
+                    <input class="form-control" type="text" id="position" name="member[position]" value="<%= member.position %>">
+                </div>
+                <div class="form-group">
+                    <label for="hoursperweek">Hours per Week</label>
+                    <input class="form-control" type="text" id="hoursperweek" name="member[hoursperweek]" value="<%= member.hoursperweek %>">
+                </div>
+                <div class="form-group">
+                    <button class="btn-lg btn-primary btn-block">Submit!</button>
+                </div>
+            </form>
+            <a href="/teams/<%= team_id %>">Go back!</a>
+        </div>
+    </div>
+</div>
+
+<% include ../partials/footer %>

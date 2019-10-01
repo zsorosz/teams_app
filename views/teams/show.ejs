@@ -13,6 +13,7 @@
                     <strong><%= member.firstname %> <%= member.lastname %></strong>
                     <span class="float-right"><%= member.hoursperweek %>h/week</span>
                     <p><%= member.position %></p>
+                    <a href="/teams/<%= team._id %>/members/<%= member._id %>/edit" class="btn btn-sm btn-warning float-right mb-3">Edit Member</a>
                 </div>
             </div>
         <% }); %>
