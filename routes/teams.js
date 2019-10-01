@@ -71,4 +71,15 @@ router.put("/:id", function(req, res){
     });
   });
 
+  // DESTROY TEAM ROUTE
+router.delete("/:id", function(req, res){
+    Team.findByIdAndRemove(req.params.id, function(err){
+        if(err){
+            res.redirect("/teams");
+        } else {
+            res.redirect("/teams");
+        }
+    });
+});
+
 module.exports = router;

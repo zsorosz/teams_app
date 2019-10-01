@@ -1,10 +1,15 @@
 <% include ../partials/header %>
 <div class="container">
+    <div class="d-flex justify-content-end">
+        <a class="btn btn-sm btn-warning" href="/teams/<%= team._id %>/edit">Edit Team</a>
+        <form action="/teams/<%= team._id %>?_method=DELETE" method="POST">
+            <button class="btn btn-sm btn-danger">Delete Team</button>
+        </form>
+    </div>
     <div class="card">
         <h4 class="card-title"><a href="#"><%= team.country %></a></h4>
         <p class="card-text">Teamlead: <%= team.teamlead %></p>
         <p class="card-text">Country Code: <%= team.countrycode %></p>
-        <a class="btn btn-sm btn-warning d-inline float-right" href="/teams/<%= team._id %>/edit">Edit Team</a>
     </div>
     <div class="card bg-light p-3">
         <% team.members.forEach(function(member) { %>
