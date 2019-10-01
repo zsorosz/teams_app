@@ -74,4 +74,15 @@ router.get("/:member_id/edit", function(req, res){
     });
 });
 
+//Update member
+router.put("/:member_id", function(req, res){
+    Member.findByIdAndUpdate(req.params.member_id, req.body.member, function(err, updatedMember){
+        if(err){
+            res.redirect("back");
+        } else {
+            res.redirect("/teams/" + req.params.id);
+        }
+    });
+});
+
 module.exports = router;
