@@ -2,6 +2,8 @@ var express         = require("express"),
     app             = express(),
     bodyParser      = require("body-parser"),
     mongoose        = require("mongoose"),
+    passport        = require("passport"),
+    LocalStrategy   = require("passport-local"),
     methodOverride  = require("method-override"),
     flash           = require("connect-flash"),
     Team            = require("./models/team"),
@@ -26,6 +28,18 @@ app.use(flash());
 app.use("/", indexRoutes);
 app.use("/teams", teamsRoutes);
 app.use("/teams/:id/members", membersRoutes);
+
+// PASSPORT CONFIG
+app.use(require("express-session")({
+  secret: "Unstoppable Ninja Cseppke!",
+  resave: false,
+  saveUninitialized: false
+}));
+app.use(passport.initialize());
+app.use(passport.session());
+passport.use(new LocalStrategy(User.authenticate()));
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
 
 var port = process.env.PORT || 3000;
 app.listen(port, function () {
