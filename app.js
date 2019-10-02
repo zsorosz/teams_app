@@ -10,6 +10,7 @@ var express         = require("express"),
     Member          = require("./models/member"),
     User            = require("./models/user"),
     seedDB          = require("./seed"),
+    plan            = require("./public/js/plan"),
 
     // requiring routes
     teamsRoutes         = require("./routes/teams"),
@@ -31,6 +32,7 @@ app.use("/", indexRoutes);
 app.use("/teams", teamsRoutes);
 app.use("/teams/:id/members", membersRoutes);
 app.use("/teams/:id/plan", planRoutes);
+
 
 
 var port = process.env.PORT || 3000;

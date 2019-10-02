@@ -40,6 +40,18 @@ router.post("/", middleware.isAdmin, function(req, res){
 
 //SHOW - shows more info about one team
 router.get("/:id", function(req, res){
+    var dates = [];
+    function getDaysInMonth(month, year) {
+    var date = new Date(Date.UTC(year, month, 1));
+    
+    while (date.getMonth() === month) {
+       dates.push(new Date(date));
+       date.setDate(date.getDate() + 1);
+    }
+  };
+  var days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+  getDaysInMonth(9, 2019);
+  
     //find the team with provided id
     Team.findById(req.params.id).populate("members").exec(function(err, foundTeam){
         if(err || !foundTeam){
@@ -47,7 +59,7 @@ router.get("/:id", function(req, res){
             res.redirect("back");
         } else{
             //render show template with that team
-            res.render("teams/show", {team: foundTeam});
+            res.render("teams/show", {team: foundTeam, dates: dates, days: days});
         }
     });
 });
