@@ -14,7 +14,9 @@ var express         = require("express"),
     // requiring routes
     teamsRoutes         = require("./routes/teams"),
     membersRoutes       = require("./routes/members"),
-    indexRoutes         = require("./routes/index")
+    indexRoutes         = require("./routes/index"),
+    planRoutes          = require("./routes/plan")
+
 
 mongoose.connect('mongodb://localhost/teamsapp', {useNewUrlParser: true, useUnifiedTopology: true});
 app.use(bodyParser.urlencoded({extended: true}));
@@ -28,6 +30,7 @@ app.use(flash());
 app.use("/", indexRoutes);
 app.use("/teams", teamsRoutes);
 app.use("/teams/:id/members", membersRoutes);
+app.use("/teams/:id/plan", planRoutes);
 
 
 var port = process.env.PORT || 3000;

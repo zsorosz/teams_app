@@ -1,5 +1,14 @@
 <% include ../partials/header %>
 <div class="container">
+    <div class="row">
+        <div class="col-md-3">
+            <div class="list-group">
+                <li class="list-group-item active bg-secondary"><a href="">Overview</a></li>
+                <li class="list-group-item"><a href="/teams/<%= team._id %>/plan">Shift Plan</a></li>
+                <li class="list-group-item"><a href="">Holidays</a></li>
+            </div>
+        </div>
+        <div class="col-md-9">
     <div class="d-flex justify-content-end">
         <% if(currentUser && currentUser.isAdmin){ %>
         <a class="btn btn-sm btn-info" href="/teams/<%= team._id %>/edit">Edit Team</a>
@@ -33,6 +42,8 @@
         <% if(currentUser && currentUser.isAdmin){ %>
         <a class="btn btn-sm btn-warning d-inline float-right" href="/teams/<%= team._id %>/members/new">Add a new team member</a>
         <% } %>
+
+        <div id="caleandar"></div>
 
 
 <% include ../partials/footer %>
