@@ -1,0 +1,33 @@
+<% include ../partials/header %>
+    <h1>Shift Plan</h1>
+        <table class="table">
+            <thead class="thead-dark">
+                <tr>
+                    <th></th>
+                    <% dates.forEach(function(date) { %>
+                    <th scope="col"><%= days[date.getDay()] %>
+                    </th>
+                    <% }); %>
+                </tr>
+            </thead>
+            <thead class="thead-light">
+                <tr>
+                    <th></th>
+                    <% dates.forEach(function(day) { %>
+                    <th scope="col"><%= day.getDate() %></th>
+                    <% }); %>
+                </tr>
+            </thead>
+            <tbody>
+                <% team.members.forEach(function(member) { %>
+                <tr>
+                    <td scope="row"><%= member.lastname %></td>
+                    <% for( var i = firstDayOfMonth; i <= dates.length + 1; i++) {%>
+                        <td class="shifts"><%= plan1[i] %></td>
+                    <% } %>
+                </tr>
+                <% }); %>
+            </tbody>
+        </table>
+
+<% include ../partials/footer %>

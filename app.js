@@ -9,8 +9,9 @@ var express         = require("express"),
     Team            = require("./models/team"),
     Member          = require("./models/member"),
     User            = require("./models/user"),
+    Plan            = require("./models/plan"),
     seedDB          = require("./seed"),
-    plan            = require("./public/js/plan"),
+  
 
     // requiring routes
     teamsRoutes         = require("./routes/teams"),
