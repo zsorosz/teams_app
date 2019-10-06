@@ -1,5 +1,10 @@
 <% include ../partials/header %>
     <h1>Shift Plan</h1>
+    <p>
+        <% if(currentUser && currentUser.isAdmin){ %>
+        <a class="btn btn-outline-dark btn-lg" href="/teams/<%= team._id %>/plan/new">Create a new Shift Plan</a>
+        <% } %>
+    </p>
         <table class="table">
             <thead class="thead-dark">
                 <tr>
@@ -77,5 +82,4 @@
                 <% }) %>
             </tbody>
         </table>
-
 <% include ../partials/footer %>
