@@ -46,6 +46,9 @@ router.post("/", middleware.isAdmin, function(req, res){
                 if(err){
                     console.log(err);
                 } else {
+                    if(member.position === "Editor"){
+                        member.isEditor = true;
+                    }
                     member.save();
                     team.members.push(member);
                     team.save();

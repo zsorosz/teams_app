@@ -10,3 +10,24 @@ td {
 .shifts {
     text-align: center;
 }
+
+.early {
+    background-color: green;
+    text-align: center;
+}
+.late {
+    background-color: orange;
+    text-align: center;
+}
+.special {
+    background-color: blue;
+    text-align: center;
+}
+.teamleadShift {
+    background-color: lightsteelblue;
+    text-align: center;
+}
+.off {
+    background-color: white;
+    text-align: center;
+}

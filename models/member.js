@@ -5,7 +5,8 @@ var memberSchema = mongoose.Schema({
     lastname: String,
     position: String,
     hoursperweek: Number,
-    team: String
+    team: String,
+    isEditor: {type: Boolean, default: false}
 });
 
 module.exports = mongoose.model("Member", memberSchema);

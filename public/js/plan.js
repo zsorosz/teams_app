@@ -1,13 +1,23 @@
-var express = require("express");
-// var days = [];
-// function getDaysInMonth(month, year) {
-//     var date = new Date(Date.UTC(year, month, 1));
-    
-//     while (date.getMonth() === month) {
-//        days.push(new Date(date));
-//        date.setDate(date.getDate() + 1);
-//     }
-//     return days;
-//   }
-//   getDaysInMonth(9, 2019);
-//   console.log(days);
+
+let shiftDay = document.querySelectorAll('.shifts');
+console.log(shiftDay)
+
+
+shiftDay.forEach(element => {
+    console.log(element.innerHTML);
+    if(element.innerHTML === "1"){
+        element.className = "early";
+        element.innerHTML = "8";
+    } else if (element.innerHTML === "2"){
+        element.className = "late";
+        element.innerHTML = "8";
+    } else if (element.innerHTML === "3"){
+        element.className = "special";
+        element.innerHTML = "8";
+    } else if (element.innerHTML === "5"){
+        element.className = "teamleadShift";
+        element.innerHTML = "8";
+    } else if (element.innerHTML === "0"){
+        element.className = "off";
+    }
+});

@@ -5,8 +5,7 @@
                 <tr>
                     <th></th>
                     <% dates.forEach(function(date) { %>
-                    <th scope="col"><%= days[date.getDay()] %>
-                    </th>
+                        <th scope="col"><%= days[date.getDay()] %></th>
                     <% }); %>
                 </tr>
             </thead>
@@ -14,19 +13,68 @@
                 <tr>
                     <th></th>
                     <% dates.forEach(function(day) { %>
-                    <th scope="col"><%= day.getDate() %></th>
+                        <th scope="col"><%= day.getDate() %></th>
                     <% }); %>
                 </tr>
             </thead>
             <tbody>
                 <% team.members.forEach(function(member) { %>
-                <tr>
-                    <td scope="row"><%= member.lastname %></td>
-                    <% for( var i = firstDayOfMonth; i <= dates.length + 1; i++) {%>
-                        <td class="shifts"><%= plan1[i] %></td>
+                    <% if (member.position === "Teamlead") { %>
+                        <tr>
+                        <td scope="row"><%= member.lastname %></td>
+                        <% for( var i = firstDayOfMonth; i <= dates.length + 1; i++) { %>
+                            <td class="shifts"><%= monthA0[i] %></td>
+                        <% } %>
+                        </tr>
+                    <% } else if (member.position === "Freelance Editor") { %>
+                        <tr>
+                        <td scope="row"><%= member.lastname %></td>
+                        <% for( var i = firstDayOfMonth; i <= dates.length + 1; i++) { %>
+                            <td class="shifts">0</td>
+                        <% } %>
+                        </tr>
                     <% } %>
-                </tr>
                 <% }); %>
+
+                <% var editors = []; %>
+                <% team.members.forEach(function(member) { %>
+                    <% if(member.isEditor) { %>
+                        <% editors.push(member); %>
+                    <% } %>
+                <% }) %>
+                <% editors.forEach(function(editor, index){ %>
+                    <% if (index === 0 || index === 4){ %>
+                        <tr>
+                        <td scope="row"><%= editor.lastname %></td>
+                        <% var shiftPlan = [] %>
+                        <% for( var i = firstDayOfMonth; i <= dates.length + 1; i++) { %>
+                            <% shiftPlan.push(monthA1[i]); %>
+                            <td class="shifts"><%= monthA1[i] %></td>
+                        <% } %>
+                        </tr>   
+                    <% } else if (index === 1 || index === 5){ %>
+                        <tr>
+                        <td scope="row"><%= editor.lastname %></td>
+                        <% for( var i = firstDayOfMonth; i <= dates.length + 1; i++) { %>
+                            <td class="shifts"><%= monthB1[i] %></td>
+                        <% } %>
+                        </tr>   
+                    <% } else if (index === 2 || index === 6){ %>
+                        <tr>
+                        <td scope="row"><%= editor.lastname %></td>
+                        <% for( var i = firstDayOfMonth; i <= dates.length + 1; i++) { %>
+                            <td class="shifts"><%= monthA2[i] %></td>
+                        <% } %>
+                        </tr>   
+                    <% } else if (index === 3 || index === 7){ %>
+                        <tr>
+                        <td scope="row"><%= editor.lastname %></td>
+                        <% for( var i = firstDayOfMonth; i <= dates.length + 1; i++) { %>
+                            <td class="shifts"><%= monthB2[i] %></td>
+                        <% } %>
+                        </tr>   
+                    <% } %>
+                <% }) %>
             </tbody>
         </table>
 
