@@ -8,7 +8,7 @@ middlewareObj.isAdmin = function(req, res, next){
         if(req.user.isAdmin){
             next();
         } else {
-                    //req.flash("error", "You don't have permission to do that.");
+            //req.flash("error", "You don't have permission to do that.");
             res.redirect("back");
         }
     } else {

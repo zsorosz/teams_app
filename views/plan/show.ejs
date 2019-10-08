@@ -1,23 +1,18 @@
 <% include ../partials/header %>
     <h1>Shift Plan</h1>
-    <p>
-        <% if(currentUser && currentUser.isAdmin){ %>
-        <a class="btn btn-outline-dark btn-lg" href="/teams/<%= team._id %>/plan/new">Create a new Shift Plan</a>
-        <% } %>
-    </p>
         <table class="table">
             <thead class="thead-dark">
                 <tr>
                     <th></th>
-                    <% dates.forEach(function(date) { %>
-                        <th scope="col"><%= days[date.getDay()] %></th>
+                    <% plan.dates.forEach(function(date) { %>
+                        <th scope="col"><%= plan.days[date.getDay()] %></th>
                     <% }); %>
                 </tr>
             </thead>
             <thead class="thead-light">
                 <tr>
                     <th></th>
-                    <% dates.forEach(function(day) { %>
+                    <% plan.dates.forEach(function(day) { %>
                         <th scope="col"><%= day.getDate() %></th>
                     <% }); %>
                 </tr>
@@ -27,14 +22,14 @@
                     <% if (member.position === "Teamlead") { %>
                         <tr>
                         <td scope="row"><%= member.lastname %></td>
-                        <% for( var i = firstDayOfMonth; i <= dates.length + 1; i++) { %>
-                            <td class="shifts"><%= monthA0[i] %></td>
+                        <% for( var i = plan.firstDayOfMonth; i < plan.dates.length + plan.firstDayOfMonth; i++) { %>
+                            <td class="shifts"><%= plan.monthA0[i] %></td>
                         <% } %>
                         </tr>
                     <% } else if (member.position === "Freelance Editor") { %>
                         <tr>
                         <td scope="row"><%= member.lastname %></td>
-                        <% for( var i = firstDayOfMonth; i <= dates.length + 1; i++) { %>
+                        <% for( var i = plan.firstDayOfMonth; i < plan.dates.length + plan.firstDayOfMonth; i++) { %>
                             <td class="shifts">0</td>
                         <% } %>
                         </tr>
@@ -52,30 +47,30 @@
                         <tr>
                         <td scope="row"><%= editor.lastname %></td>
                         <% var shiftPlan = [] %>
-                        <% for( var i = firstDayOfMonth; i <= dates.length + 1; i++) { %>
-                            <% shiftPlan.push(monthA1[i]); %>
-                            <td class="shifts"><%= monthA1[i] %></td>
+                        <% for( var i = plan.firstDayOfMonth; i < plan.dates.length + plan.firstDayOfMonth; i++) { %>
+                            <% shiftPlan.push(plan.monthA1[i]); %>
+                            <td class="shifts"><%= plan.monthA1[i] %></td>
                         <% } %>
                         </tr>   
                     <% } else if (index === 1 || index === 5){ %>
                         <tr>
                         <td scope="row"><%= editor.lastname %></td>
-                        <% for( var i = firstDayOfMonth; i <= dates.length + 1; i++) { %>
-                            <td class="shifts"><%= monthB1[i] %></td>
+                        <% for( var i = plan.firstDayOfMonth; i < plan.dates.length + plan.firstDayOfMonth; i++) { %>
+                            <td class="shifts"><%= plan.monthB1[i] %></td>
                         <% } %>
                         </tr>   
                     <% } else if (index === 2 || index === 6){ %>
                         <tr>
                         <td scope="row"><%= editor.lastname %></td>
-                        <% for( var i = firstDayOfMonth; i <= dates.length + 1; i++) { %>
-                            <td class="shifts"><%= monthA2[i] %></td>
+                        <% for( var i = plan.firstDayOfMonth; i < plan.dates.length + plan.firstDayOfMonth; i++) { %>
+                            <td class="shifts"><%= plan.monthA2[i] %></td>
                         <% } %>
                         </tr>   
                     <% } else if (index === 3 || index === 7){ %>
                         <tr>
                         <td scope="row"><%= editor.lastname %></td>
-                        <% for( var i = firstDayOfMonth; i <= dates.length + 1; i++) { %>
-                            <td class="shifts"><%= monthB2[i] %></td>
+                        <% for( var i = plan.firstDayOfMonth; i < plan.dates.length + plan.firstDayOfMonth; i++) { %>
+                            <td class="shifts"><%= plan.monthB2[i] %></td>
                         <% } %>
                         </tr>   
                     <% } %>

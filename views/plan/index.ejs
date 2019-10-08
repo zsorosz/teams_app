@@ -4,9 +4,9 @@
     <div class="container">
         <h1>Shift Plans</h1>
         <p>
-            <% if(currentUser && currentUser.isAdmin){ %>
+            
             <a class="btn btn-outline-dark btn-lg" href="/teams/<%= team._id %>/plan/new">Create a new Shift Plan</a>
-            <% } %>
+            
         </p>
     </div>
 </header>
@@ -14,12 +14,8 @@
 <div class="container d-flex justify-content-left flex-wrap">
     <% team.plans.forEach(function(plan){ %>
         <div class="card" style="max-width: 20vw; border: none">
-            <div class="d-flex">
-                <div class="">
-                    <div class="card-body">
-                        <h5 class="card-title"><a href="/teams/<%= team._id %>" class="text-dark"><%= plan.year %>-<%= plan.month %></a></h5>
-                    </div>
-                </div>
+            <div class="card-body">
+                <h5 class="card-title"><a href="/teams/<%= team._id %>/plan/<%= plan._id %>" class="text-dark bg-warning"><%= plan.year %>-<%= plan.month %></a></h5>
             </div>
         </div>
     <% }) %>
