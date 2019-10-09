@@ -1,0 +1,98 @@
+<% include ../partials/header %>
+    <h1>Shift Plan</h1>
+    <a class="btn btn-outline-dark btn-sm mb-3" href="/teams/<%= team._id %>/plan">Back</a>
+    <div class="edit-form">
+        <form action="">
+            <input type="text" value="lorem">
+            <input type="text" value="lorem">
+        </form>
+    </div>
+    <table class="table">
+            <thead class="thead-dark">
+                <tr>
+                    <th></th>
+                    <% plan.dates.forEach(function(date) { %>
+                        <th scope="col"><%= plan.days[date.getDay()] %></th>
+                    <% }); %>
+                </tr>
+            </thead>
+            <thead class="thead-light">
+                <tr>
+                    <th></th>
+                    <% plan.dates.forEach(function(day) { %>
+                        <th scope="col"><%= day.getDate() %></th>
+                    <% }); %>
+                </tr>
+            </thead>
+            <tbody>
+                <% team.members.forEach(function(member) { %>
+                    <% if (member.position === "Teamlead") { %>
+                        <tr>
+                        <td scope="row"><%= member.lastname %></td>
+                        <% for( var i = plan.firstDayOfMonth; i < plan.dates.length + plan.firstDayOfMonth; i++) { %>
+                            <td class="shifts" id="<%= member.lastname %>_<%= plan.year %>-<%= plan.month %>-<%= [i] - plan.firstDayOfMonth + 1%>"><%= plan.monthA0[i] %></td>
+                        <% } %>
+                        </tr>
+                    <% } else if (member.position === "Freelance Editor") { %>
+                        <tr>
+                        <td scope="row"><%= member.lastname %></td>
+                        <% for( var i = plan.firstDayOfMonth; i < plan.dates.length + plan.firstDayOfMonth; i++) { %>
+                            <td class="shifts" id="<%= member.lastname %>_<%= plan.year %>-<%= plan.month %>-<%= [i] - plan.firstDayOfMonth + 1%>">0</td>
+                        <% } %>
+                        </tr>
+                    <% } %>
+                <% }); %>
+
+                <% var editors = []; %>
+                <% var partTimeEditors = []; %>
+                <% team.members.forEach(function(member) { %>
+                    <% if(member.isEditor && member.hoursperweek > 32) { %>
+                        <% editors.push(member); %>
+                    <% } else if(member.isEditor){%>
+                        <% partTimeEditors.push(member); %>
+                        <% } %>
+                <% }) %>
+                <% editors.forEach(function(editor, index){ %>
+                    <% if (index === 0 || index === 4){ %>
+                        <tr>
+                        <td scope="row"><%= editor.lastname %></td>
+                        <% var shiftPlan = [] %>
+                        <% for( var i = plan.firstDayOfMonth; i < plan.dates.length + plan.firstDayOfMonth; i++) { %>
+                            <% shiftPlan.push(plan.monthA1[i]); %>
+                            <td class="shifts" id="<%= editor.lastname %>_<%= plan.year %>-<%= plan.month %>-<%= [i] - plan.firstDayOfMonth + 1 %>"><%= plan.monthA1[i] %></td>
+                        <% } %>
+                        </tr>   
+                    <% } else if (index === 1 || index === 5){ %>
+                        <tr>
+                        <td scope="row"><%= editor.lastname %></td>
+                        <% for( var i = plan.firstDayOfMonth; i < plan.dates.length + plan.firstDayOfMonth; i++) { %>
+                            <td class="shifts" id="<%= editor.lastname %>_<%= plan.year %>-<%= plan.month %>-<%= [i] - plan.firstDayOfMonth + 1 %>"><%= plan.monthB1[i] %></td>
+                        <% } %>
+                        </tr>   
+                    <% } else if (index === 2 || index === 6){ %>
+                        <tr>
+                        <td scope="row"><%= editor.lastname %></td>
+                        <% for( var i = plan.firstDayOfMonth; i < plan.dates.length + plan.firstDayOfMonth; i++) { %>
+                            <td class="shifts" id="<%= editor.lastname %>_<%= plan.year %>-<%= plan.month %>-<%= [i] - plan.firstDayOfMonth + 1 %>"><%= plan.monthA2[i] %></td>
+                        <% } %>
+                        </tr>   
+                    <% } else if (index === 3 || index === 7){ %>
+                        <tr>
+                        <td scope="row"><%= editor.lastname %></td>
+                        <% for( var i = plan.firstDayOfMonth; i < plan.dates.length + plan.firstDayOfMonth; i++) { %>
+                            <td class="shifts" id="<%= editor.lastname %>_<%= plan.year %>-<%= plan.month %>-<%= [i] - plan.firstDayOfMonth + 1 %>"><%= plan.monthB2[i] %></td>
+                        <% } %>
+                        </tr>   
+                    <% } %>
+                <% }) %>
+                <% partTimeEditors.forEach(function(editor, index){ %>
+                    <tr>
+                        <td scope="row"><%= editor.lastname %></td>
+                        <% for( var i = plan.firstDayOfMonth; i < plan.dates.length + plan.firstDayOfMonth; i++) { %>
+                            <td class="part-time_shifts" id="<%= editor.lastname %>_<%= plan.year %>-<%= plan.month %>-<%= [i] - plan.firstDayOfMonth + 1%>"><%= plan.monthB2[i] %></td>
+                        <% } %>
+                        </tr>   
+                    <% }); %>
+            </tbody>
+        </table>
+<% include ../partials/footer %>

@@ -55,7 +55,7 @@ router.post("/", function(req, res){
             };
 
             var year = parseInt(req.body.year, 10);
-            var month = parseInt(req.body.month, 10);
+            var month = parseInt(req.body.month, 10) - 1;
 
             getDaysInMonth(month, year);
     
@@ -112,7 +112,7 @@ router.post("/", function(req, res){
                     plan.save();
                     team.plans.push(plan);
                     team.save();
-                    res.redirect("/teams/" + team._id + "/plan");
+                    res.redirect("/teams/" + team._id + "/plan/" + plan._id);
                 }
             });
         }
@@ -136,5 +136,23 @@ router.get("/:planID", function(req, res){
         }
     });
 });
+
+// EDIT Shift Plan
+router.get("/:planID/edit", function(req, res){
+    Team.findById(req.params.id).populate("members").exec(function(err, foundTeam){
+        if(err || !foundTeam){
+            //req.flash("error", "Campground not found");
+            return res.redirect("back");
+        }
+        Plan.findById(req.params.planID, function(err, foundPlan){
+            if(err){
+                res.redirect("back");
+            } else {
+                res.render("plan/edit", {team: foundTeam, plan: foundPlan});
+            }
+        });
+    });
+});
+
 
 module.exports = router;

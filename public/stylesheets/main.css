@@ -11,6 +11,10 @@ td {
     text-align: center;
 }
 
+.part-time_shifts {
+    text-align: center;
+}
+
 .early {
     background-color: green;
     text-align: center;
@@ -30,4 +34,17 @@ td {
 .off {
     background-color: white;
     text-align: center;
+}
+.edit-form {
+    display: none;
+    position: absolute;
+    top: 0;
+    right: 20px;
+    width: 200px;
+    height: 100px;
+    padding: 20px;
+    background-color: rebeccapurple;
+}
+.edit-form.is-open {
+    display: block;
 }

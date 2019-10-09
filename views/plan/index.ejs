@@ -2,6 +2,7 @@
 
 <header class="jumbotron">
     <div class="container">
+        <a class="btn btn-outline-dark btn-sm mb-3" href="/teams/<%= team._id %>">Back</a>
         <h1>Shift Plans</h1>
         <p>
             
@@ -13,10 +14,8 @@
 
 <div class="container d-flex justify-content-left flex-wrap">
     <% team.plans.forEach(function(plan){ %>
-        <div class="card" style="max-width: 20vw; border: none">
-            <div class="card-body">
-                <h5 class="card-title"><a href="/teams/<%= team._id %>/plan/<%= plan._id %>" class="text-dark bg-warning"><%= plan.year %>-<%= plan.month %></a></h5>
-            </div>
+        <div class="m-3">
+            <a class="btn btn-warning btn-lg" href="/teams/<%= team._id %>/plan/<%= plan._id %>"><%= plan.year %>-<%= plan.month + 1%></a>
         </div>
     <% }) %>
 </div>

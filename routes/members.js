@@ -15,26 +15,6 @@ router.get("/new", middleware.isAdmin, function(req, res){
     });
 });
 
-// // Create member
-// router.post("/", function(req, res){
-//     var firstname = req.body.firstname;
-//     var position = req.body.position;
-//     var newMember = {firstname: firstname, position: position};
-//     Member.create(newMember, function(err, member){
-//         Team.findById(req.params.id, function(err, foundTeam){
-//             if(err){
-//                 console.log(err);
-//             } else {
-//                 member.save();
-//                 foundTeam.members.push(member);
-//                 foundTeam.save();
-//                 res.redirect("/teams");
-//                 console.log(member.firstname);
-//             }
-//         });
-//     });
-// });
-
 //Create member
 router.post("/", middleware.isAdmin, function(req, res){
     Team.findById(req.params.id, function(err, team){
