@@ -6,7 +6,13 @@ var memberSchema = mongoose.Schema({
     position: String,
     hoursperweek: Number,
     team: String,
-    isEditor: {type: Boolean, default: false}
+    isEditor: {type: Boolean, default: false},
+    plans: [ 
+        {
+            id: {},
+            shift: []
+        }    
+    ]
 });
 
 module.exports = mongoose.model("Member", memberSchema);

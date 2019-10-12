@@ -36,7 +36,7 @@ router.get("/new", function(req, res){
 
 // CREATE new plan
 router.post("/", function(req, res){
-    Team.findById(req.params.id).populate("plans").exec(function(err, team){
+    Team.findById(req.params.id).populate("plans members").exec(function(err, team){
         if(err){
             //req.flash("error", "Team not found");
             res.redirect("back");
@@ -103,12 +103,63 @@ router.post("/", function(req, res){
                 });
             });
 
-            var newPlan = {year: year, month: month, dates: dates, days: days, firstDayOfMonth: firstDayOfMonth, monthA0: monthA0, monthA1: monthA1, monthB1, monthB1, monthA2: monthA2, monthB2: monthB2};
+            var shiftPlan;
+
+            var shiftPlanF0 = [];
+            var shiftPlanA0 = [];
+            var shiftPlanA1 = [];
+            var shiftPlanB1 = [];
+            var shiftPlanA2 = [];
+            var shiftPlanB2 = [];
+
+            var editors = [];
+            var partTimeEditors = [];
+
+            team.members.forEach(function(member) {
+                if(member.isEditor) {
+                    editors.push(member);
+                }
+            });
+
+            for( var i = firstDayOfMonth; i < dates.length + firstDayOfMonth; i++) {
+                shiftPlanF0.push(0);
+                shiftPlanA0.push(monthA0[i]);
+                shiftPlanA1.push(monthA1[i]);
+                shiftPlanB1.push(monthB1[i]);
+                shiftPlanA2.push(monthA2[i]);
+                shiftPlanB2.push(monthB2[i]);
+            }
+            
+            var newPlan = {editors: editors, partTimeEditors: partTimeEditors, year: year, month: month, dates: dates, days: days, firstDayOfMonth: firstDayOfMonth, monthA0: monthA0, monthA1: monthA1, monthB1, monthB1, monthA2: monthA2, monthB2: monthB2, shiftPlanA0: shiftPlanA0, shiftPlanF0: shiftPlanF0};
 
             Plan.create(newPlan, function(err, plan){
                 if(err){
                     console.log(err);
                 } else {
+                    team.members.forEach(function(member) {
+                        if (member.position === "Teamlead") {
+                            member.plans.push({id: plan._id, shift: shiftPlanA0});
+                            member.save();
+                        } else if (member.position === "Freelancer") { 
+                            member.plans.push({id: plan._id, shift: shiftPlanF0});
+                            member.save();
+                        }
+                    });
+                    editors.forEach(function(member, index) {
+                        if (index === 0 || index === 4){
+                            member.plans.push({id: plan._id, shift: shiftPlanA1});
+                            member.save();
+                        } else if (index === 1 || index === 5){
+                            member.plans.push({id: plan._id, shift: shiftPlanB1});
+                            member.save();
+                        } else if (index === 2 || index === 6){
+                            member.plans.push({id: plan._id, shift: shiftPlanA2});
+                            member.save();
+                        } else if (index === 3 || index === 7){
+                            member.plans.push({id: plan._id, shift: shiftPlanB2});
+                            member.save();
+                        } 
+                    });
                     plan.save();
                     team.plans.push(plan);
                     team.save();
