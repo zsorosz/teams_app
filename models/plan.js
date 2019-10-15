@@ -19,7 +19,16 @@ var planSchema = mongoose.Schema({
     shiftPlanB1: [],
     shiftPlanA2: [],
     shiftPlanB2: [],
-    shiftPlanF0: []
+    shiftPlanF0: [],
+    memberPlans: [ 
+        {
+            id: {
+                type: mongoose.Schema.Types.ObjectId,
+                ref: "Member"
+            },
+            shift: []
+        }    
+    ]
 });
 
 module.exports = mongoose.model("Plan", planSchema);

@@ -160,6 +160,13 @@ router.post("/", function(req, res){
                             member.save();
                         } 
                     });
+                    team.members.forEach(function(member){
+                        member.plans.forEach(function(p){
+                            if(p.id.equals(plan._id)) {
+                                plan.memberPlans.push({id: member._id, shift: p.shift});
+                            }
+                        });
+                    });
                     plan.save();
                     team.plans.push(plan);
                     team.save();
@@ -202,6 +209,41 @@ router.get("/:planID/edit", function(req, res){
                 res.render("plan/edit", {team: foundTeam, plan: foundPlan});
             }
         });
+    });
+});
+
+//Update shiftplan
+router.put("/:planID", function(req, res){
+    Plan.findByIdAndUpdate(req.params.planID, req.body.plan, function(err, updatedPlan){
+        if(err){
+            res.redirect("back");
+        } else {
+            Team.findById(req.params.id).populate("members").exec(function(err, team){
+                if(err){
+                    res.redirect("back");
+                } else{
+                    var shiftsArr = [];
+                    updatedPlan.memberPlans.forEach(function(memberPlan) {
+                        team.members.forEach(function(member){
+                            
+                            if(member._id = memberPlan.id) {
+                                console.log(typeof req.body.shift);
+                                shiftsArr.push(req.body.shift);
+                                var shift = parseInt(req.body.shift, 10);
+                                shiftsArr.forEach(function(shift){
+                                    memberPlan.shift = shift;
+                                })
+                                // memberPlan.shift = shiftsArr;
+                                
+                                //memberPlan.shift.split(',').map(Number);
+                            }
+                        });
+                    });
+                }
+                updatedPlan.save();
+                res.redirect("/teams/" + team._id + "/plan/");
+            });
+        }
     });
 });
 

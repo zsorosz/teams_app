@@ -5,10 +5,14 @@ let partTimeShift = document.querySelectorAll('.part-time_shifts');
 let cell = document.querySelectorAll('td');
 let editForm = document.querySelector('.edit-form');
 
+let shiftInput = document.querySelector('.shiftInput');
+
 cell.forEach((cell)=>{
     cell.addEventListener('click', (event)=>{
-        editForm.classList.remove('is-open');
-        editForm.classList.add('is-open');
+        editForm.classList.toggle('is-open');
+        shiftInput.innerHTML = cell.id;
+        //editForm.classList.add('is-open');
+        console.log(cell.id)
     });
 })
 

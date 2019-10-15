@@ -2,36 +2,40 @@
     <h1>Shift Plan</h1>
     <a class="btn btn-outline-dark btn-sm mb-3" href="/teams/<%= team._id %>/plan">Back</a>
     <a class="btn btn-warning btn-sm mb-3" href="/teams/<%= team._id %>/plan/<%= plan._id %>/edit">Edit</a>
-        <table class="table">
-            <thead class="thead-dark">
-                <tr>
-                    <th></th>
-                    <% plan.dates.forEach(function(date) { %>
-                        <th scope="col"><%= plan.days[date.getDay()] %></th>
-                    <% }); %>
-                </tr>
-            </thead>
-            <thead class="thead-light">
-                <tr>
-                    <th></th>
-                    <% plan.dates.forEach(function(day) { %>
-                        <th scope="col"><%= day.getDate() %></th>
-                    <% }); %>
-                </tr>
-            </thead>
-            <tbody>
-                <% team.members.forEach(function(member) { %>
-                    <tr>
-                        <td scope="row"><%= member.lastname %></td>
-                        <% member.plans.forEach(function(p){ %>
-                            <% if(p.id.equals(plan._id)) { %>
-                                <% for( var i = 0; i < plan.dates.length; i++) { %>
-                                    <td class="shifts <%= p.shift[i] %>" id="<%= member.lastname %>_<%= plan.year %>-<%= plan.month %>-<%= [i] %>"><%= p.shift[i] %></td>
+    <table class="table">
+        <thead class="thead-dark">
+            <tr>
+                <th></th>
+                <% plan.dates.forEach(function(date) { %>
+                    <th scope="col"><%= plan.days[date.getDay()] %></th>
+                <% }); %>
+            </tr>
+        </thead>
+        <thead class="thead-light">
+            <tr>
+                <th></th>
+                <% plan.dates.forEach(function(day) { %>
+                    <th scope="col"><%= day.getDate() %></th>
+                <% }); %>
+            </tr>
+        </thead>
+        <tbody>
+            <% plan.memberPlans.forEach(function(memberPlan) { %> 
+                <% team.members.forEach(function(member){ %>
+                    <% if(member.id == memberPlan.id){ %>
+                        <tr>
+                            <td scope="row"><%= member.lastname %></td>
+                            <% for( var i = 0; i < plan.dates.length; i++) { %>
+                                <% if(member.hoursperweek > 32){ %>
+                                        <td class="shifts"><%= memberPlan.shift[i] %></td>
+                                    <% } else { %>
+                                        <td class="part-time_shifts"><%= memberPlan.shift[i] %></td>   
                                 <% } %>
-                            <% } %>
-                        <% }); %>
-                    </tr>
-                <% }); %>      
-            </tbody>
-        </table>
+                            <% } %> 
+                        </tr>
+                    <% } %>
+                <% }); %>
+            <% }); %> 
+        </tbody>
+    </table>
 <% include ../partials/footer %>

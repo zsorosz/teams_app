@@ -1,11 +1,24 @@
 th {
     text-align: center;
     font-size: 12px;
+    width: 200%;
+    
 }
 
 td {
     font-size: 12px;
+    width: 100%;
 }
+tr {
+    width: 100%;
+}
+thead {
+    width: 100%;
+}
+tbody {
+    width: 100%;
+}
+
 
 .shifts {
     text-align: center;
